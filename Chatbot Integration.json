@@ -1,0 +1,113 @@
+{
+  "name": "Chatbot Integration",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        16
+      ],
+      "id": "7f562594-692f-49b4-93d8-e4bc22849eb6",
+      "name": "When chat message received",
+      "webhookId": "ab8a3b72-3e8f-4fad-82a9-89e884f01569"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        16
+      ],
+      "id": "43e7487e-7733-4d6c-8ac7-76d710eaab2c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        224
+      ],
+      "id": "68c3b0b9-d55d-4922-ac29-d3c134f2fc96",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QbdcDunbqKa1Ydof",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        224
+      ],
+      "id": "fd144b54-7555-4145-ba66-354c2a54a8e2",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "a59c4970-0bc1-4a54-8a32-2798d8d54841",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b9895d7c4bd60f3a96e1d811fcd81f08b1c108593a7acd10ab9c8834d591165a"
+  },
+  "id": "JVLuZST40d1ST4Bv",
+  "tags": []
+}
